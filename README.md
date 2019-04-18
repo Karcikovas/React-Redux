@@ -1,2 +1,1 @@
-# React-Redux
-# React-Redux
+# React-Redux Home work For NFq Front-end!
