@@ -17,6 +17,7 @@ class Card extends React.Component {
       score,
       votes,
       description,
+
     } = this.props;
     const { opened } = this.state;
     

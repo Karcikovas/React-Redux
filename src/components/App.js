@@ -1,33 +1,35 @@
 import React from 'react';
 import Card from './Card';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { endpoints, getImageUrl } from '../../config';
-import { setMovieList } from '../actions';
 import { getMovieList } from '../thunks';
-import { setGenreList } from '../actions';
-import { getGenreList } from '../thunks';
+import { getGenresList } from '../thunks';
+import { getGenreMovies } from '../thunks';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    
+    props.onGetGenreMovies();
     props.onGetMovieList();
     props.onGetGenreList();
   };
-  
+
+
   render() {
     const { movieList } = this.props;
     const { genreList } = this.props;
-    
+
     return (
         <div>
           <div className='genres'>
             {genreList.map((listItem) => (
                 <span
                     className='genre'
+                    key={listItem.id}
+                    onClick={(
 
+                    ) =>  this.props.onGetGenreMovies(listItem.id)}
                 >
               {listItem.name}
             </span>
@@ -49,14 +51,19 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  movieList: state.movies.list,
-  genreList: state.genres.list,
-});
+
+const mapStateToProps = (state) => {
+  return{
+    genreMovies: state.genreMovies.list,
+    movieList: state.movies.list,
+    genreList: state.genres.list,
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
+  onGetGenreMovies: (id) => dispatch(getGenreMovies(id)),
   onGetMovieList: () => dispatch(getMovieList()),
-  onGetGenreList: () => dispatch(getGenreList()),
+  onGetGenreList: () => dispatch(getGenresList()),
 });
 
 export default connect(
