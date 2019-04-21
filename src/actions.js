@@ -1,5 +1,6 @@
 
 export const setMovieList = (list) => ({
+
   type: 'SET_MOVIE_LIST',
   list,
 });
@@ -9,7 +10,15 @@ export const setGenresList = (list) => ({
   list,
 });
 
-export const SetHearted = (id) => ({
-  type: 'SET_HEARTED_MOVIE',
+export const setLike = (id) => ({
+  type: 'SET_LIKE',
   id,
 });
+
+export const unsetLike = (id) => ({
+  type: 'UNSET_LIKE',
+  id,
+});
+
+
+

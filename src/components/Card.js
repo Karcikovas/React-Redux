@@ -11,13 +11,15 @@ class Card extends React.Component {
   
   render() {
     const {
+        id,
       backgroundImage,
       title,
       releaseDate,
       score,
       votes,
       description,
-
+        onLike,
+        hearted
     } = this.props;
     const { opened } = this.state;
     
@@ -33,11 +35,14 @@ class Card extends React.Component {
         <div className="card__title">
           {title}
         </div>
-    
-        <div className="card__like">
-            <i className="fa fa-heart-o" />
-        </div>
-    
+
+          <div
+              className="card__like"
+              onClick={()=>onLike(id)}
+          >
+              <i className={`fa ${hearted ? 'fa-heart' : 'fa-heart-o'}`} />
+          </div>
+
         <div className="card__subtitle">
             <span>{releaseDate}</span>
             <span>{score} ({votes} votes)</span>

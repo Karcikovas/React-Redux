@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 const initialState = {
   list: [],
   genrelist: [],
+  hearted: []
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -12,7 +13,13 @@ const moviesReducer = (state = initialState, action) => {
         ...state,
         list: action.list,
       };
-
+    case 'SET_LIKE':
+      const liked = [...state.hearted, action.id];
+      const newliked = [...new Set(liked)];
+      return {...state, hearted: newliked};
+    case 'UNSET_LIKE':
+      const unliked = state.hearted.filter(item => item !== action.id);
+      return {...state, hearted: unliked};
     default: return state;
   }
 };
